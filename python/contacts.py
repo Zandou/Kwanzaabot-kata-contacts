@@ -2,6 +2,7 @@ import sys
 import sqlite3
 from pathlib import Path
 from datetime import datetime
+from random import *
 
 
 class Contacts:
@@ -27,6 +28,7 @@ class Contacts:
     def insert_contacts(self, contacts):
         print("Inserting contacts ...")
         # TODO
+        
 
     def get_name_for_email(self, email):
         print("Looking for email", email)
@@ -55,9 +57,18 @@ class Contacts:
 def yield_contacts(num_contacts):
     # TODO: Generate a lot of contacts
     # instead of just 3
-    yield ("name-1", "email-1@domain.tld")
-    yield ("name-2", "email-2@domain.tld")
-    yield ("name-3", "email-3@domain.tld")
+    if(not isinstance(num_contacts, int)):
+        print("Please enter a valid number")
+        return
+    
+    i=0
+    while(i<num_contacts):
+        yield("name-"+i,"email-"+i+"@domain.tld")
+        i+=1
+    
+    # yield ("name-1", "email-1@domain.tld")
+    # yield ("name-2", "email-2@domain.tld")
+    # yield ("name-3", "email-3@domain.tld")
 
 
 def main():

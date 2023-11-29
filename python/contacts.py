@@ -15,7 +15,7 @@ class Contacts:
             cursor.execute(
                 """
                 CREATE TABLE contacts(
-                  id INTEGER PRIMARY KEY,
+                  id INTEGER PRIMARY KEY AUTOINCREMENT,
                   name TEXT NOT NULL,
                   email TEXT NOT NULL
                 )
@@ -27,8 +27,8 @@ class Contacts:
 
     def insert_contacts(self, contacts):
         print("Inserting contacts ...")
-        # TODO
-        
+        cursor = self.connection.cursor()
+        cursor.executemany("""INSERT INTO contacts (name, email) VALUES (?,?)""", contacts)
 
     def get_name_for_email(self, email):
         print("Looking for email", email)
@@ -62,8 +62,8 @@ def yield_contacts(num_contacts):
         return
     
     i=0
-    while(i<num_contacts):
-        yield("name-"+i,"email-"+i+"@domain.tld")
+    while(i<=num_contacts):
+        yield("name-"+str(i),"email-"+str(i)+"@domain.tld")
         i+=1
     
     # yield ("name-1", "email-1@domain.tld")
